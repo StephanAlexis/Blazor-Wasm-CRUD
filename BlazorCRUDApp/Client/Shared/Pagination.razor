@@ -44,6 +44,8 @@
         var isPreviousPageLinkEnabled = CurrentPage != 1;
         var previousPage = CurrentPage - 1;
         links.Add(new LinkModel(previousPage, isPreviousPageLinkEnabled, "Previous"));
+        var isGoToFirstEnabled = CurrentPage - Radius > 1;
+        links.Add(new LinkModel(1, isGoToFirstEnabled, "<<"));
 
         for (int i = 1; i <= TotaPagesQuantity; i++)
         {
@@ -52,7 +54,8 @@
                 links.Add(new LinkModel(i) { Active = CurrentPage == i });
             }
         }
-
+        var isGoToLastEnabled = CurrentPage + Radius < TotaPagesQuantity;
+        links.Add(new LinkModel(TotaPagesQuantity, isGoToLastEnabled, ">>"));
         var isNextPageLinkEnabled = CurrentPage != TotaPagesQuantity;
         var nextPage = CurrentPage + 1;
         links.Add(new LinkModel(nextPage, isNextPageLinkEnabled, "Next"));
